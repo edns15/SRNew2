@@ -7,17 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.PrintWriter;
+import java.security.Key;
+import java.util.*;
+
 
 @Controller
 public class ContactForm {
 
     private HashMap<String, Long> usuarios = new HashMap<String, Long>();
     private HashMap<Long, String> tracks = new HashMap<Long, String>();
+    private List<User> usuarioss;
 
     private DataRecommendationModels models = DataRecommendationModels.instance();
 
@@ -44,6 +46,42 @@ public class ContactForm {
 
     public void setUsuarios(HashMap<String, Long> pUsuarios) {
         usuarios = pUsuarios;
+    }
+    
+     @RequestMapping("/addUserRating")
+    public ModelAndView t1AgregarUsuarioRating(@RequestParam Map<String, String> params){
+        System.out.println("Se van a agregar ratings");
+        Map<String, Object> model = new HashMap<>();
+        String tipoRecomendador = params.get("t1_added");
+        String user = params.get("user");
+        String item = params.get("item");
+        String rating = params.get("rating");
+
+        HashMap<String, Long> nuevo = models.getUsers_ids();
+        System.out.println("en hash map" + nuevo.get(user));
+
+
+
+        if(elUsuarioExiste(params)==false){
+            agregarUsuario(params);
+            try {
+                models.loadUsers();
+            } catch (IOException e) {
+
+                System.out.println(e.getMessage());
+            }
+        }
+
+        Long userL = nuevo.get(user);
+
+        Long itemL = Long.parseLong(item);
+        //System.out.println("Long de usuario: " + userL + " "  );
+        Long ratingL = Long.parseLong(rating);
+
+
+
+        models.addRating(tipoRecomendador, userL, itemL,  ratingL);
+        return new ModelAndView("taller1UsuarioRating", model);
     }
 
     public List<User> listar(HashMap<String, Long> pUsuarios, HashMap<Long, String> pTracks) {
@@ -76,5 +114,40 @@ public class ContactForm {
         //Corregir, si hay más items que usuarios
         return lista;
     }
+    
+     public boolean elUsuarioExiste(@RequestParam Map<String, String> params){
+        boolean rta = false;
+        String user = params.get("user");
+
+        HashMap<String, Long> nuevo = models.getUsers_ids();
+        System.out.println("en hash map" + nuevo.get(user));
+
+        Long userL = nuevo.get(user);
+        if(userL!=null){
+            rta = true;
+
+        }
+
+        return rta;
+    }
+    
+    public void agregarUsuario(@RequestParam Map<String, String> params){
+
+
+        String user = params.get("user");
+
+        HashMap<String, Long> nuevo = models.getUsers_ids();
+        System.out.println("en hash map" + nuevo.get(user));
+        Long id = new Long(nuevo.size()+1);
+
+
+        models.addUser(user, id);
+        
+
+
+    }
+    
+   
+    
 
 }
