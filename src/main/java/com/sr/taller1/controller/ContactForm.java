@@ -52,7 +52,7 @@ public class ContactForm {
     public ModelAndView t1AgregarUsuarioRating(@RequestParam Map<String, String> params){
         System.out.println("Se van a agregar ratings");
         Map<String, Object> model = new HashMap<>();
-        String tipoRecomendador = params.get("t1_added");
+        String tipoRecomendador = params.get("tipo");
         String user = params.get("user");
         String item = params.get("item");
         String rating = params.get("rating");
