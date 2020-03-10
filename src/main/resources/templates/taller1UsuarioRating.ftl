@@ -29,7 +29,7 @@
 		        <div class="col-md-4 mb-3">
                   <label for="tipoRecomendador">Tipo Recomendador</label>
                   <select name="tipoRecomendador" id="tipoRecomendador" class="custom-select" required>
-                    <option value="">Tipo Recomendador ...</option>
+                    <option value="tipo">Tipo Recomendador ...</option>
                     <option value="track_model">Canciones</option>
                     <option value="artist_model">Artistas</option>
                   </select>
