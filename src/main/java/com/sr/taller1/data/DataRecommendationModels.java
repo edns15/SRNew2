@@ -45,16 +45,17 @@ public class DataRecommendationModels {
     private DataRecommendationModels(){
     }
 
+    public HashMap<String,Long> getUsers_ids(){
+        return user_ids;
+    }
+
+
     public static DataRecommendationModels instance() throws IOException {
         if(instance == null) {
             instance = new DataRecommendationModels();
             instance.init();
         }
         return instance;
-    }
-    
-    public HashMap<String,Long> getUsers_ids(){
-        return user_ids;
     }
 
     private void init() throws IOException {
@@ -63,7 +64,7 @@ public class DataRecommendationModels {
         this.loadArtists();
     }
 
-    private void loadUsers() throws IOException {
+    public void loadUsers() throws IOException {
         File file = this.loadFileFromResource(user_ids_file);
 
         try (Stream<String> stream = Files.lines(Paths.get(file.getAbsolutePath()))) {
@@ -88,6 +89,12 @@ public class DataRecommendationModels {
 
     public HashMap<Long,String> getTracksAllReady(){
         return track_ids;
+    }
+
+    public void addUser(String name, Long id){
+
+        this.getUsers_ids().put(name, id);
+
     }
 
 
@@ -127,12 +134,6 @@ public class DataRecommendationModels {
 
     public String getArtist(Long id){
         return artist_ids.get(id);
-    }
-    
-     public void addUser(String name, Long id){
-
-        this.getUsers_ids().put(name, id);
-
     }
 
     private File loadFileFromResource(String fileName){
@@ -198,25 +199,15 @@ public class DataRecommendationModels {
 
         // Preferences for user
         HashMap<Long,Preference> prefsUser;
-        //getUsersAllCurrentStatus(user_preferences);
         if(!user_preferences.containsKey(user)) {
             prefsUser=new HashMap<>();
-            //System.out.println("Aceptado: " +user);
             user_preferences.put(user,prefsUser);
         }
-        else{
+        else
             prefsUser = user_preferences.get(user);
-            System.out.println(prefsUser.getClass());
-            //System.out.println("No Aceptado: " +user);
-        }
 
         prefsUser.put(item,new GenericPreference(user,item,rating));
     }
-
-    //public void getUsersAllCurrentStatus(HashMap<Long,HashMap<Long,Preference>> user_preferences){
-        
-        //return user_ids;
-    //}
 
     public DataModel getModel(String model) throws IOException {
         if( model.equals(track_model)){
@@ -236,3 +227,4 @@ public class DataRecommendationModels {
         return null;
     }
 }
+
