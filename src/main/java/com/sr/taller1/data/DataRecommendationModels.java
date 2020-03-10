@@ -40,7 +40,7 @@ public class DataRecommendationModels {
 
     private HashMap<Long,String> artist_ids= new HashMap<>();
     private HashMap<Long,String> track_ids= new HashMap<>();
-    private HashMap<String,Long> user_ids= new HashMap<>();
+    public HashMap<String,Long> user_ids= new HashMap<>();
 
     private DataRecommendationModels(){
     }
@@ -51,6 +51,10 @@ public class DataRecommendationModels {
             instance.init();
         }
         return instance;
+    }
+    
+    public HashMap<String,Long> getUsers_ids(){
+        return user_ids;
     }
 
     private void init() throws IOException {
@@ -123,6 +127,12 @@ public class DataRecommendationModels {
 
     public String getArtist(Long id){
         return artist_ids.get(id);
+    }
+    
+     public void addUser(String name, Long id){
+
+        this.getUsers_ids().put(name, id);
+
     }
 
     private File loadFileFromResource(String fileName){
