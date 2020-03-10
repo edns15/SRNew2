@@ -47,8 +47,8 @@ public class ContactForm {
     public void setUsuarios(HashMap<String, Long> pUsuarios) {
         usuarios = pUsuarios;
     }
-    
-     @RequestMapping("/addUserRating")
+
+    @RequestMapping("/addUserRating")
     public ModelAndView t1AgregarUsuarioRating(@RequestParam Map<String, String> params){
         System.out.println("Se van a agregar ratings");
         Map<String, Object> model = new HashMap<>();
@@ -93,6 +93,7 @@ public class ContactForm {
 
 
         models.addRating(tipoRecomendador, userL, itemL,  ratingL);
+
         return new ModelAndView("taller1UsuarioRating", model);
     }
 
@@ -126,8 +127,8 @@ public class ContactForm {
         //Corregir, si hay más items que usuarios
         return lista;
     }
-    
-     public boolean elUsuarioExiste(@RequestParam Map<String, String> params){
+
+    public boolean elUsuarioExiste(@RequestParam Map<String, String> params){
         boolean rta = false;
         String user = params.get("user");
 
@@ -142,7 +143,7 @@ public class ContactForm {
 
         return rta;
     }
-    
+
     public void agregarUsuario(@RequestParam Map<String, String> params){
 
 
@@ -154,12 +155,12 @@ public class ContactForm {
 
 
         models.addUser(user, id);
-        
+
 
 
     }
-    
-   
-    
+
+
+
 
 }
