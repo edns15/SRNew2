@@ -27,13 +27,12 @@
 		    <div class="form-row">
 
 		        <div class="col-md-4 mb-3">
-                  <label for="tipoRecomendador">Tipo Recomendador</label>
-                  <select name="tipoRecomendador" id="tipoRecomendador" class="custom-select" required>
-                    <option value="tipo">Tipo Recomendador ...</option>
+                <label for="tipoRecomendador">Tipo Recomendador</label>
+                <select name="tipoRecomendador" id="tipoRecomendador" class="custom-select" required>
                     <option value="track_model">Canciones</option>
                     <option value="artist_model">Artistas</option>
-                  </select>
-                </div>
+                </select>
+            </div>
 		        
 		        <div class="col-md-4 mb-3">
 				   <label for="user">User</label>
