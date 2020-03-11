@@ -62,6 +62,11 @@ public class ContactForm {
         String item = params.get("item");
         String rating = params.get("rating");
 
+        model.put("tipoRecomendador",user);
+        model.put("user",user);
+        model.put("item",item);
+        model.put("rating",rating);
+
         HashMap<String, Long> nuevo = models.getUsers_ids();
         System.out.println("en hash map" + nuevo.get(user));
 
@@ -86,6 +91,7 @@ public class ContactForm {
         else
             RecommenderManager.instance().initTrackRecommenders();
 
+        model.put("infoMessage", "Se han reentrenado 3 modelos intem-intem y 3 modelos user-user de tipo:"+tipoRecomendador);
         return new ModelAndView("taller1UsuarioRating", model);
     }
 

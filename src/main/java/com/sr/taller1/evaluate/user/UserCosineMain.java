@@ -34,11 +34,12 @@ public class UserCosineMain {
                 UserCosineRecommenderBuilder recommenderBuilder = null;
 
                 if(j == 1)
-                    recommenderBuilder = new UserCosineRecommenderBuilder(20, 0.01);
+                    recommenderBuilder = new UserCosineRecommenderBuilder(10, 0.01);
                 else if(j == 2)
-                    recommenderBuilder = new UserCosineRecommenderBuilder(20, 0.2);
+                    recommenderBuilder = new UserCosineRecommenderBuilder(10, 0.2);
                 else
-                    recommenderBuilder = new UserCosineRecommenderBuilder(20, 0.5);
+                    recommenderBuilder = new UserCosineRecommenderBuilder(10, 0.5);
+
                 File data = DataRecommendationModels.instance().loadFileFromResource("test-train"+i+"/train_track.csv");
                 DataModel dm = new FileDataModel(data);
 

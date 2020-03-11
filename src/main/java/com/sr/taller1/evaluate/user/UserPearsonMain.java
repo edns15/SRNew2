@@ -33,11 +33,11 @@ public class UserPearsonMain {
                 UserPearsonRecommenderBuilder recommenderBuilder = null;
 
                 if(j == 1)
-                    recommenderBuilder = new UserPearsonRecommenderBuilder(20, 0.01);
+                    recommenderBuilder = new UserPearsonRecommenderBuilder(10, 0.01);
                 else if(j == 2)
-                    recommenderBuilder = new UserPearsonRecommenderBuilder(20, 0.2);
+                    recommenderBuilder = new UserPearsonRecommenderBuilder(10, 0.2);
                 else
-                    recommenderBuilder = new UserPearsonRecommenderBuilder(20, 0.5);
+                    recommenderBuilder = new UserPearsonRecommenderBuilder(10, 0.5);
 
                 File data = DataRecommendationModels.instance().loadFileFromResource("test-train"+j+"/train_track.csv");
                 DataModel dm = new FileDataModel(data);

@@ -31,7 +31,7 @@
 		        
 		        <div class="col-md-4 mb-3">
 				  <label for="tipoRecomendador">Tipo Recomendador</label>
-			      <select name="tipoRecomendador" id="tipoRecomendador" class="custom-select" value="${tipoRecomendador}" required>
+			      <select name="tipoRecomendador" id="tipoRecomendador" class="custom-select" required>
 			        <option value="">Tipo Recomendador ...</option>
 			      	<option value="track_model" <#if tipoRecomendador?? && tipoRecomendador=="track_model" > selected </#if> >Canciones</option>
 				    <option value="artist_model"<#if tipoRecomendador?? && tipoRecomendador=="artist_model" > selected </#if> >Artistas</option>
@@ -40,7 +40,7 @@
 
 		        <div class="col-md-4 mb-3">
                   <label for="algoritmo">Algoritmo</label>
-                  <select name="algoritmo" id="algoritmo" class="custom-select" value="${algoritmo}" required>
+                  <select name="algoritmo" id="algoritmo" class="custom-select" required>
                     <option value="">Algoritmo ...</option>
                     <option value="jaccard" <#if algoritmo?? && algoritmo=="jaccard" > selected </#if> >Jaccard</option>
                     <option value="cosine" <#if algoritmo?? && algoritmo=="cosine" > selected </#if> >Cosine</option>
@@ -50,7 +50,7 @@
 
                 <div class="col-md-4 mb-3">
                   <label for="tipo_algoritmo">Tipo Algoritmo</label>
-                  <select name="tipo_algoritmo" id="tipo_algoritmo" class="custom-select" value="${tipo_algoritmo}" required>
+                  <select name="tipo_algoritmo" id="tipo_algoritmo" class="custom-select" required>
                     <option value="">Tipo algoritmo ...</option>
                     <option value="item-item" <#if tipo_algoritmo?? && tipo_algoritmo=="item-item" > selected </#if> >item-item</option>
                     <option value="user-user" <#if tipo_algoritmo?? && tipo_algoritmo=="user-user" > selected </#if> >user-user</option>

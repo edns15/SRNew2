@@ -17,6 +17,11 @@
         ${errorMessage}
     </div>
 </#if>
+<#if infoMessage??>
+    <div style="color:green;font-style:italic;">
+        ${infoMessage}
+    </div>
+</#if>
 <div class="container">
     <h2>Taller 1 - Agregar usuarios y ratings</h2>
     <a class="btn btn-warning btn-lg" href="taller1" role="button">VOLVER</a>
@@ -29,8 +34,8 @@
             <div class="col-md-4 mb-3">
                 <label for="tipoRecomendador">Tipo Recomendador</label>
                 <select name="tipoRecomendador" id="tipoRecomendador" class="custom-select" required>
-                    <option value="track_model">Canciones</option>
-                    <option value="artist_model">Artistas</option>
+                    <option value="track_model" <#if tipoRecomendador?? && tipoRecomendador=="track_model" > selected </#if> >Canciones</option>
+                    <option value="artist_model" <#if tipoRecomendador?? && tipoRecomendador=="artist_model" > selected </#if> >Artistas</option>
                 </select>
             </div>
 
@@ -47,11 +52,11 @@
             <div class="col-md-4 mb-3">
                 <label for="rating">Rating</label>
                 <select name="rating" id="rating" class="custom-select" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    <option value="1" <#if rating?? && rating=="1" > selected </#if> >1</option>
+                    <option value="2" <#if rating?? && rating=="2" > selected </#if> >2</option>
+                    <option value="3" <#if rating?? && rating=="3" > selected </#if> >3</option>
+                    <option value="4" <#if rating?? && rating=="4" > selected </#if> >4</option>
+                    <option value="5" <#if rating?? && rating=="5" > selected </#if> >5</option>
                 </select>
             </div>
         </div>
