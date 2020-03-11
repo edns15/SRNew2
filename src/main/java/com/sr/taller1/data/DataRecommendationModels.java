@@ -136,7 +136,7 @@ public class DataRecommendationModels {
         return artist_ids.get(id);
     }
 
-    private File loadFileFromResource(String fileName){
+    public File loadFileFromResource(String fileName){
         URL url = this.getClass().getClassLoader().getResource(fileName);
         File file = null;
         try {

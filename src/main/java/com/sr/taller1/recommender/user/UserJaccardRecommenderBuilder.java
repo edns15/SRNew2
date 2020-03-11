@@ -13,9 +13,19 @@ import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
 public class UserJaccardRecommenderBuilder implements RecommenderBuilder {
 
+    private int n = 20;
+    private double minSimilarity = 0.02;
+
+    public UserJaccardRecommenderBuilder(int n, double minSimilarity){
+        this.n = n;
+        this.minSimilarity = minSimilarity;
+    }
+
+    public UserJaccardRecommenderBuilder(){}
+
     public Recommender buildRecommender(DataModel dataModel) throws TasteException {
         UserSimilarity similarity = new TanimotoCoefficientSimilarity(dataModel);
-        UserNeighborhood neighborhood = new NearestNUserNeighborhood(20,0.02, similarity, dataModel);
+        UserNeighborhood neighborhood = new NearestNUserNeighborhood(n,minSimilarity, similarity, dataModel);
         return new GenericUserBasedRecommender(dataModel, neighborhood, similarity);
     }
 }

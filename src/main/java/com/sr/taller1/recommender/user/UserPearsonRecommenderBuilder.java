@@ -13,9 +13,19 @@ import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
 public class UserPearsonRecommenderBuilder implements RecommenderBuilder {
 
+    private int n = 20;
+    private double minSimilarity = 0.02;
+
+    public UserPearsonRecommenderBuilder(int n, double minSimilarity){
+        this.n = n;
+        this.minSimilarity = minSimilarity;
+    }
+
+    public UserPearsonRecommenderBuilder(){}
+
     public Recommender buildRecommender(DataModel dataModel) throws TasteException {
         UserSimilarity similarity = new PearsonCorrelationSimilarity(dataModel);
-        UserNeighborhood neighborhood = new NearestNUserNeighborhood(20,0.02, similarity, dataModel);
+        UserNeighborhood neighborhood = new NearestNUserNeighborhood(n,minSimilarity, similarity, dataModel);
         return new GenericUserBasedRecommender(dataModel, neighborhood, similarity);
     }
 }
