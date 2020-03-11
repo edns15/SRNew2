@@ -43,6 +43,34 @@ public class ContactForm {
         return new ModelAndView("taller1UsuarioRating", model);
     }
 
+    @RequestMapping("/show_track_list")
+    public ModelAndView darCanciones(@RequestParam Map<String, String> params) {
+        usuarios = models.getUsersAllReady();
+        tracks = models.getTracksAllReady();
+
+        List<User> nuevaLista = listar(usuarios,tracks);
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("recommendations",nuevaLista);
+
+
+        return new ModelAndView("taller1UsuarioRating", model);
+    }
+
+    @RequestMapping("/show_artist_list")
+    public ModelAndView darArtistas(@RequestParam Map<String, String> params) {
+        usuarios = models.getUsersAllReady();
+        tracks = models.getTracksAllReady();
+
+        List<User> nuevaLista = listar(usuarios,tracks);
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("recommendations",nuevaLista);
+
+
+        return new ModelAndView("taller1UsuarioRating", model);
+    }
+
 
 
 

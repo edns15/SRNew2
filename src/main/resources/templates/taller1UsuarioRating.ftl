@@ -68,6 +68,14 @@
     <h2>Revelar usuarios</h2>
     <a class="btn btn-info btn-lg" href="show_user_list" role="button">Mostrar</a>
 </div>
+<div class="container">
+    <h2>Revelar artistas</h2>
+    <a class="btn btn-info btn-lg" href="show_artist_list" role="button">Mostrar</a>
+</div>
+<div class="container">
+    <h2>Revelar canciones</h2>
+    <a class="btn btn-info btn-lg" href="show_track_list" role="button">Mostrar</a>
+</div>
 
 <#if recommendations ??>
     <div class="container">
