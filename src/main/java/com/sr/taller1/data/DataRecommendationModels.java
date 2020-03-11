@@ -64,7 +64,7 @@ public class DataRecommendationModels {
         this.loadArtists();
     }
 
-    public void loadUsers() throws IOException {
+    private void loadUsers() throws IOException {
         File file = this.loadFileFromResource(user_ids_file);
 
         try (Stream<String> stream = Files.lines(Paths.get(file.getAbsolutePath()))) {

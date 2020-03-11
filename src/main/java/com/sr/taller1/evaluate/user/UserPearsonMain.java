@@ -2,6 +2,7 @@ package com.sr.taller1.evaluate.user;
 
 import com.sr.taller1.data.DataRecommendationModels;
 import com.sr.taller1.evaluate.RMSEEvaluator;
+import com.sr.taller1.recommender.user.UserCosineRecommenderBuilder;
 import com.sr.taller1.recommender.user.UserPearsonRecommenderBuilder;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.RecommenderEvaluator;
@@ -26,15 +27,27 @@ public class UserPearsonMain {
     private void recommendAndEvaluate() throws IOException, TasteException {
         System.out.println("User Pearson");
 
-        UserPearsonRecommenderBuilder recommenderBuilder = new UserPearsonRecommenderBuilder(30,0.01);
+        for(int i = 1; i <= 3; i++) {
+            for (int j = 1; j <= 3; j++) {
 
-        File data = DataRecommendationModels.instance().loadFileFromResource("test-train1/train_artist.csv");
-        DataModel dm = new FileDataModel(data);
+                UserPearsonRecommenderBuilder recommenderBuilder = null;
 
-        Recommender recommender = recommenderBuilder.buildRecommender(dm);
+                if(j == 1)
+                    recommenderBuilder = new UserPearsonRecommenderBuilder(20, 0.01);
+                else if(j == 2)
+                    recommenderBuilder = new UserPearsonRecommenderBuilder(20, 0.2);
+                else
+                    recommenderBuilder = new UserPearsonRecommenderBuilder(20, 0.5);
 
-        RMSEEvaluator evaluator = new RMSEEvaluator(recommender,"test-train1/test_artist.csv");
-        double result = evaluator.evaluate();
-        System.out.println(result);
+                File data = DataRecommendationModels.instance().loadFileFromResource("test-train"+j+"/train_track.csv");
+                DataModel dm = new FileDataModel(data);
+
+                Recommender recommender = recommenderBuilder.buildRecommender(dm);
+
+                RMSEEvaluator evaluator = new RMSEEvaluator(recommender, "test-train"+j+"/test_track.csv");
+                double result = evaluator.evaluate();
+                System.out.println(result);
+            }
+        }
     }
 }

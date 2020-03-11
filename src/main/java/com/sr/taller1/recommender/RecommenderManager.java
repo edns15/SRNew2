@@ -51,7 +51,7 @@ public class RecommenderManager {
         return instance;
     }
 
-    private void initArtistRecommenders() throws IOException, TasteException {
+    public void initArtistRecommenders() throws IOException, TasteException {
 
         DataModel artistModel = models.getModel(DataRecommendationModels.artist_model);
 
@@ -74,7 +74,7 @@ public class RecommenderManager {
         System.out.println("Loaded artist item-item recommenders");
     }
 
-    private void initTrackRecommenders() throws IOException, TasteException {
+    public void initTrackRecommenders() throws IOException, TasteException {
 
         DataModel trackModel = models.getModel(DataRecommendationModels.track_model);
 

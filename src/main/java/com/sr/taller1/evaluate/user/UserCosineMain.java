@@ -25,17 +25,30 @@ public class UserCosineMain {
     }
 
     private void recommendAndEvaluate() throws IOException, TasteException {
-        UserCosineRecommenderBuilder recommenderBuilder = new UserCosineRecommenderBuilder(30,0.01);
 
         System.out.println("User Cosine");
-        File data = DataRecommendationModels.instance().loadFileFromResource("test-train1/train_artist.csv");
-        DataModel dm = new FileDataModel(data);
 
-        Recommender recommender = recommenderBuilder.buildRecommender(dm);
+        for(int i = 1; i <= 3; i++) {
+            for(int j = 1; j <= 3; j++) {
 
-        RMSEEvaluator evaluator = new RMSEEvaluator(recommender,"test-train1/test_artist.csv");
-        double result = evaluator.evaluate();
-        System.out.println(result);
+                UserCosineRecommenderBuilder recommenderBuilder = null;
+
+                if(j == 1)
+                    recommenderBuilder = new UserCosineRecommenderBuilder(20, 0.01);
+                else if(j == 2)
+                    recommenderBuilder = new UserCosineRecommenderBuilder(20, 0.2);
+                else
+                    recommenderBuilder = new UserCosineRecommenderBuilder(20, 0.5);
+                File data = DataRecommendationModels.instance().loadFileFromResource("test-train"+i+"/train_track.csv");
+                DataModel dm = new FileDataModel(data);
+
+                Recommender recommender = recommenderBuilder.buildRecommender(dm);
+
+                RMSEEvaluator evaluator = new RMSEEvaluator(recommender, "test-train"+i+"/test_track.csv");
+                double result = evaluator.evaluate();
+                System.out.println(result);
+            }
+        }
 
     }
 }

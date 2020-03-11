@@ -1,5 +1,6 @@
 package com.sr.taller1.controller;
 
+import com.sr.taller1.data.DataRecommendationModels;
 import com.sr.taller1.model.Recommendation;
 import com.sr.taller1.recommender.RecommenderManager;
 import org.apache.mahout.cf.taste.common.TasteException;
@@ -30,13 +31,34 @@ public class Taller1Controller {
         String user = params.get("user");
         String tipo_algoritmo = params.get("tipo_algoritmo");
         String resultados = params.get("resultados");
-
-        List<Recommendation> recomendation = recommenders.recommend(tipoRecomendador,algoritmo,user,tipo_algoritmo,Integer.parseInt(resultados));
-
         Map<String, Object> model = new HashMap<>();
-        model.put("recommendations",recomendation);
-        System.out.println("Recommendations: "+recomendation);
-        return new ModelAndView("taller1", model);
+
+        model.put("tipoRecomendador",tipoRecomendador);
+        model.put("algoritmo",algoritmo);
+        model.put("user",user);
+        model.put("tipo_algoritmo",tipo_algoritmo);
+        model.put("resultados",resultados);
+
+        try {
+            if(DataRecommendationModels.instance().getUser(user) == null)
+            {
+                model.put("errorMessage","Usuario no existe");
+                return new ModelAndView("taller1", model);
+            }
+            List<Recommendation> recomendation = recommenders.recommend(tipoRecomendador, algoritmo, user, tipo_algoritmo, Integer.parseInt(resultados));
+
+            model.put("recommendations",recomendation);
+            System.out.println("Recommendations: "+recomendation);
+            return new ModelAndView("taller1", model);
+        }
+        catch(org.apache.mahout.cf.taste.common.NoSuchUserException ex){
+            model.put("errorMessage","Usuario no existe");
+            return new ModelAndView("taller1", model);
+        } catch (IOException e) {
+            model.put("errorMessage","IO Error");
+            return new ModelAndView("taller1", model);
+        }
+
     }
 
 

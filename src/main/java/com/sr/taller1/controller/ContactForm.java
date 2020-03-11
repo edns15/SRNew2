@@ -2,6 +2,8 @@ package com.sr.taller1.controller;
 import com.sr.taller1.data.DataRecommendationModels;
 import com.sr.taller1.model.Recommendation;
 import com.sr.taller1.model.User;
+import com.sr.taller1.recommender.RecommenderManager;
+import org.apache.mahout.cf.taste.common.TasteException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,20 +51,11 @@ public class ContactForm {
     }
 
     @RequestMapping("/addUserRating")
-    public ModelAndView t1AgregarUsuarioRating(@RequestParam Map<String, String> params){
+    public ModelAndView t1AgregarUsuarioRating(@RequestParam Map<String, String> params) throws IOException, TasteException {
         System.out.println("Se van a agregar ratings");
         Map<String, Object> model = new HashMap<>();
 
-        String artist = params.get("artist_model");
-        String track = params.get("track_model");
-        String tipoRecomendador = "";
-        if(artist==null&&track!=null){
-
-            tipoRecomendador+=track;
-        }
-        else if(artist!=null&&track==null){
-            tipoRecomendador+=artist;
-        }
+        String tipoRecomendador = params.get("tipoRecomendador");
 
         System.out.println("tipoRecomendador: " + tipoRecomendador);
         String user = params.get("user");
@@ -76,12 +69,6 @@ public class ContactForm {
 
         if(elUsuarioExiste(params)==false){
             agregarUsuario(params);
-            try {
-                models.loadUsers();
-            } catch (IOException e) {
-
-                System.out.println(e.getMessage());
-            }
         }
 
         Long userL = nuevo.get(user);
@@ -93,6 +80,11 @@ public class ContactForm {
 
 
         models.addRating(tipoRecomendador, userL, itemL,  ratingL);
+        models.buildModel(tipoRecomendador);
+        if(tipoRecomendador.equals(models.artist_model))
+            RecommenderManager.instance().initArtistRecommenders();
+        else
+            RecommenderManager.instance().initTrackRecommenders();
 
         return new ModelAndView("taller1UsuarioRating", model);
     }

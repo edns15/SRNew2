@@ -13,8 +13,8 @@ import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
 public class UserPearsonRecommenderBuilder implements RecommenderBuilder {
 
-    private int n = 20;
-    private double minSimilarity = 0.02;
+    private int n = 30;
+    private double minSimilarity = 0.001;
 
     public UserPearsonRecommenderBuilder(int n, double minSimilarity){
         this.n = n;

@@ -13,8 +13,8 @@ import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
 public class UserCosineRecommenderBuilder implements RecommenderBuilder {
 
-    private int n = 20;
-    private double minSimilarity = 0.02;
+    private int n = 30;
+    private double minSimilarity = 0.001;
 
     public UserCosineRecommenderBuilder(int n, double minSimilarity){
         this.n = n;
