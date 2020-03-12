@@ -41,12 +41,12 @@
 
             <div class="col-md-4 mb-3">
                 <label for="user">User</label>
-                <input type="text" class="form-control" name="user" id="user" placeholder="User" required>
+                <input type="text" class="form-control" name="user" id="user" placeholder="User" value="${user}" required>
             </div>
 
             <div class="col-md-4 mb-3">
                 <label for="item">Item</label>
-                <input type="text" class="form-control" name="item" id="item" placeholder="Item" required>
+                <input type="text" class="form-control" name="item" id="item" placeholder="Item" value="${item}" required>
             </div>
 
             <div class="col-md-4 mb-3">
@@ -65,34 +65,43 @@
 </div>
 
 <div class="container">
-    <h2>Revelar usuarios</h2>
-    <a class="btn btn-info btn-lg" href="show_user_list" role="button">Mostrar</a>
-</div>
-<div class="container">
-    <h2>Revelar artistas</h2>
-    <a class="btn btn-info btn-lg" href="show_artist_list" role="button">Mostrar</a>
-</div>
-<div class="container">
-    <h2>Revelar canciones</h2>
-    <a class="btn btn-info btn-lg" href="show_track_list" role="button">Mostrar</a>
+    <h2>Ratings</h2>
+    <form name="show_rating_list" action="show_rating_list" method="POST">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="tipoRating">Tipo Ratings</label>
+                <select name="tipoRating" id="tipoRating" class="custom-select" required>
+                    <option value="track_model">Canciones</option>
+                    <option value="artist_model">Artistas</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="user">User</label>
+                <input type="text" class="form-control" name="user" id="user" placeholder="User" required>
+            </div>
+        </div>
+        <button class="btn btn-primary" href="show_rating_list" role="button" type="submit">Mostrar</button>
+    </form>
 </div>
 
-<#if recommendations ??>
+<#if ratings ??>
     <div class="container">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">Usuarios</th>
-                <th scope="col">Items</th>
-
+                <th scope="col">Usuario</th>
+                <th scope="col">Item id</th>
+                <th scope="col">Item Name</th>
+                <th scope="col">Rating</th>
             </tr>
             </thead>
             <tbody>
-            <#list recommendations as user>
+            <#list ratings as rating>
                 <tr class="success">
-                    <td>${user.userId}</td>
-                    <td>${user.trackId}</td>
-
+                    <td>${rating.userName}</td>
+                    <td>${rating.itemId}</td>
+                    <td>${rating.itemName}</td>
+                    <td>${rating.rating}</td>
                 </tr>
             </#list>
             </tbody>

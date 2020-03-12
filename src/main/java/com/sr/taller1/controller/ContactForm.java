@@ -4,6 +4,7 @@ import com.sr.taller1.model.Recommendation;
 import com.sr.taller1.model.User;
 import com.sr.taller1.recommender.RecommenderManager;
 import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.model.Preference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,49 +30,62 @@ public class ContactForm {
     public ContactForm() throws IOException {
     }
 
-    @RequestMapping("/show_user_list")
-    public ModelAndView darUsuarios(@RequestParam Map<String, String> params) {
-        usuarios = models.getUsersAllReady();
-        tracks = models.getTracksAllReady();
-
-        List<User> nuevaLista = listar(usuarios,tracks);
+    @RequestMapping("/show_rating_list")
+    public ModelAndView darTrackRatings(@RequestParam Map<String, String> params) {
 
         Map<String, Object> model = new HashMap<>();
-        model.put("recommendations",nuevaLista);
 
+        model.put("tipoRecomendador","");
+        model.put("user","");
+        model.put("item","");
+        model.put("rating","");
+
+        String tipoRating = params.get("tipoRating");
+        String userName = params.get("user");
+
+        HashMap<Long,HashMap<Long, Preference>> preferences = null;
+
+        if(tipoRating.equals(models.track_model))
+            preferences = models.getTrackPreferences();
+        else
+            preferences = models.getArtistPreferences();
+
+
+        ArrayList<User> usersPreferences = new ArrayList<>();
+
+
+        Long userId = models.getUsers_ids().get(userName);
+        if(!preferences.containsKey(userId)){
+            model.put("errorMessage", "Usuario no existe");
+            return new ModelAndView("taller1UsuarioRating", model);
+        }
+
+        HashMap<Long, Preference> items = preferences.get(userId);
+        ArrayList<Long> itemIds = new ArrayList(items.keySet());
+        for(Long itemId: itemIds){
+            Preference trackPreference = items.get(itemId);
+            double rating  = trackPreference.getValue();
+
+            String itemName = null;
+
+            if(tipoRating.equals(models.track_model))
+                itemName = models.getTrack(itemId);
+            else
+                itemName = models.getArtist(itemId);
+
+            User preference = new User();
+            preference.setUserName(userName);
+            preference.setRating(rating);
+            preference.setItemId(itemId.intValue()+"");
+            preference.setItemName(itemName);
+
+            usersPreferences.add(preference);
+        }
+
+        model.put("ratings",usersPreferences);
 
         return new ModelAndView("taller1UsuarioRating", model);
     }
-
-    @RequestMapping("/show_track_list")
-    public ModelAndView darCanciones(@RequestParam Map<String, String> params) {
-        usuarios = models.getUsersAllReady();
-        tracks = models.getTracksAllReady();
-
-        List<User> nuevaLista = listar(usuarios,tracks);
-
-        Map<String, Object> model = new HashMap<>();
-        model.put("recommendations",nuevaLista);
-
-
-        return new ModelAndView("taller1UsuarioRating", model);
-    }
-
-    @RequestMapping("/show_artist_list")
-    public ModelAndView darArtistas(@RequestParam Map<String, String> params) {
-        usuarios = models.getUsersAllReady();
-        tracks = models.getTracksAllReady();
-
-        List<User> nuevaLista = listar(usuarios,tracks);
-
-        Map<String, Object> model = new HashMap<>();
-        model.put("recommendations",nuevaLista);
-
-
-        return new ModelAndView("taller1UsuarioRating", model);
-    }
-
-
 
 
     public void setUsuarios(HashMap<String, Long> pUsuarios) {
@@ -90,7 +104,7 @@ public class ContactForm {
         String item = params.get("item");
         String rating = params.get("rating");
 
-        model.put("tipoRecomendador",user);
+        model.put("tipoRecomendador",tipoRecomendador);
         model.put("user",user);
         model.put("item",item);
         model.put("rating",rating);
@@ -123,36 +137,6 @@ public class ContactForm {
         return new ModelAndView("taller1UsuarioRating", model);
     }
 
-    public List<User> listar(HashMap<String, Long> pUsuarios, HashMap<Long, String> pTracks) {
-        List<String> result2 = new ArrayList(pUsuarios.keySet());
-        List<Long> result3 = new ArrayList(pTracks.keySet());
-
-
-        ArrayList<User> lista = new ArrayList<>();
-
-        ArrayList<Recommendation> recommendationResult = new ArrayList<>();
-
-
-        for(String value : result2){
-
-            String userId = value;
-
-            User usuario = new User();
-            usuario.setUserId(userId);
-
-
-            lista.add(usuario);
-        }
-        for(int i = 0; i < result2.size(); i++){
-
-            Long trackId = result3.get(i);
-            User usuario = lista.get(i);
-            usuario.setTrackId(trackId);
-        }
-
-        //Corregir, si hay más items que usuarios
-        return lista;
-    }
 
     public boolean elUsuarioExiste(@RequestParam Map<String, String> params){
         boolean rta = false;
@@ -181,9 +165,6 @@ public class ContactForm {
 
 
         models.addUser(user, id);
-
-
-
     }
 
 

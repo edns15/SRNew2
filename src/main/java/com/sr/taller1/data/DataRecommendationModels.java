@@ -49,6 +49,14 @@ public class DataRecommendationModels {
         return user_ids;
     }
 
+    public HashMap<Long,HashMap<Long,Preference>> getTrackPreferences(){
+        return this.track_user_preferences;
+    }
+
+    public HashMap<Long,HashMap<Long,Preference>> getArtistPreferences(){
+        return this.artist_user_preferences;
+    }
+
 
     public static DataRecommendationModels instance() throws IOException {
         if(instance == null) {
