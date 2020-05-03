@@ -25,29 +25,24 @@
 		</div>
 		
 		<div class="container">
-		  <table class="table table-striped">
-		    <thead>
-		      <tr>
-		        <th scope="col">Taller</th>
-		        <th scope="col">Descripción</th>
-		        <th scope="col">Fecha Publicación</th>
-		        <th scope="col">Contenido</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr class="success">
-		        <td>Taller 2 - Modelos de recomendación híbridos y sensibles al contexto.</td>
-		        <td>Sistema de recomendación de restaurantes.</td>
-		        <td>03/05/2020</td>
-		        <td>
-		        <a class="btn btn-info btn-lg" style="margin:5px;" href="taller1" role="button">Factorización</a>
-
-		        <a class="btn btn-info btn-lg" style="margin:5px;" href="taller2" role="button">Contexto</a>
-		        </td>
-
-		      </tr>
-		    </tbody>
-		  </table>
-		</div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Taller</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Fecha Publicación</th>
+                <th scope="col">Contenido</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="success">
+                <td>Taller 2 - Recomendador de restaurantes por estados de Norte América</td>
+                <td>Recomendador de restaurantes por estados de Norte América.</td>
+                <td>03/05/2020</td>
+                <td><a class="btn btn-info btn-lg" href="taller2" role="button">VER</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
     </body>
 </html>

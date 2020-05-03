@@ -1,12 +1,12 @@
-package com.sr.taller1.controller;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.sr.taller2.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Clase controladora, encargada de redireccionar a la visa de cada uno de los talleres.
@@ -22,30 +22,17 @@ public class SRController {
     }  
     
     /**
-     * Método encargado de direccionar a la vista del Taller1.
-     * 
+     * Método encargado de direccionar a la vista del Taller2.
+     *
      * @return Modelo
      */
-
-    @RequestMapping("/taller1")
-    public ModelAndView taller1() {
-        Map<String, Object> model = new HashMap<>();
-        model.put("tipoRecomendador","");
-        model.put("algoritmo","");
-        model.put("user","");
-        model.put("tipo_algoritmo","");
-        model.put("resultados","");
-        return new ModelAndView("taller1", model);
-    }
-
     @RequestMapping("/taller2")
     public ModelAndView taller2() {
         Map<String, Object> model = new HashMap<>();
-        model.put("tipoRecomendador","");
-        model.put("algoritmo","");
+        model.put("Estado","NC");
+        model.put("tipo_visita","");
         model.put("user","");
-        model.put("tipo_algoritmo","");
-        model.put("resultados","");
+
         return new ModelAndView("taller2", model);
     }
 }
