@@ -26,6 +26,7 @@ public class SRController {
      * 
      * @return Modelo
      */
+
     @RequestMapping("/taller1")
     public ModelAndView taller1() {
         Map<String, Object> model = new HashMap<>();
@@ -35,5 +36,16 @@ public class SRController {
         model.put("tipo_algoritmo","");
         model.put("resultados","");
         return new ModelAndView("taller1", model);
+    }
+
+    @RequestMapping("/taller2")
+    public ModelAndView taller2() {
+        Map<String, Object> model = new HashMap<>();
+        model.put("tipoRecomendador","");
+        model.put("algoritmo","");
+        model.put("user","");
+        model.put("tipo_algoritmo","");
+        model.put("resultados","");
+        return new ModelAndView("taller2", model);
     }
 }

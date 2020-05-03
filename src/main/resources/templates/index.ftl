@@ -36,10 +36,15 @@
 		    </thead>
 		    <tbody>
 		      <tr class="success">
-		        <td>Taller 1 - Recomendador de canciones y artistas</td>
-		        <td>Sistema de recomendación de canciones y artistas.</td>
-		        <td>02/03/2020</td>
-		        <td><a class="btn btn-info btn-lg" href="taller1" role="button">VER</a></td>
+		        <td>Taller 2 - Modelos de recomendación híbridos y sensibles al contexto.</td>
+		        <td>Sistema de recomendación de restaurantes.</td>
+		        <td>03/05/2020</td>
+		        <td>
+		        <a class="btn btn-info btn-lg" style="margin:5px;" href="taller1" role="button">Factorización</a>
+
+		        <a class="btn btn-info btn-lg" style="margin:5px;" href="taller2" role="button">Contexto</a>
+		        </td>
+
 		      </tr>
 		    </tbody>
 		  </table>

@@ -1,6 +1,6 @@
 package com.sr.taller1.controller;
 
-import com.sr.taller1.data.DataRecommendationModels;
+//import com.sr.taller1.data.DataRecommendationModels;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +13,7 @@ import java.util.Map;
 @Controller
 public class CreateRatingController {
 
-    private DataRecommendationModels models  = DataRecommendationModels.instance();
+    //private DataRecommendationModels models  = DataRecommendationModels.instance();
 
     public CreateRatingController() throws IOException {
     }

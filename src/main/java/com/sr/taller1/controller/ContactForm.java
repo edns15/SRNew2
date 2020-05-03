@@ -1,8 +1,8 @@
 package com.sr.taller1.controller;
-import com.sr.taller1.data.DataRecommendationModels;
-import com.sr.taller1.model.Recommendation;
-import com.sr.taller1.model.User;
-import com.sr.taller1.recommender.RecommenderManager;
+//import com.sr.taller1.data.DataRecommendationModels;
+//import com.sr.taller1.model.Recommendation;
+//import com.sr.taller1.model.User;
+//import com.sr.taller1.recommender.RecommenderManager;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.model.Preference;
 import org.springframework.stereotype.Controller;
@@ -22,11 +22,12 @@ public class ContactForm {
 
     private HashMap<String, Long> usuarios = new HashMap<String, Long>();
     private HashMap<Long, String> tracks = new HashMap<Long, String>();
+   /*
     private List<User> usuarioss;
 
     private DataRecommendationModels models = DataRecommendationModels.instance();
 
-
+*/
     public ContactForm() throws IOException {
     }
 
@@ -45,6 +46,7 @@ public class ContactForm {
 
         HashMap<Long,HashMap<Long, Preference>> preferences = null;
 
+        /*
         if(tipoRating.equals(models.track_model))
             preferences = models.getTrackPreferences();
         else
@@ -84,6 +86,8 @@ public class ContactForm {
 
         model.put("ratings",usersPreferences);
 
+         */
+
         return new ModelAndView("taller1UsuarioRating", model);
     }
 
@@ -109,6 +113,7 @@ public class ContactForm {
         model.put("item",item);
         model.put("rating",rating);
 
+        /*
         HashMap<String, Long> nuevo = models.getUsers_ids();
         System.out.println("en hash map" + nuevo.get(user));
 
@@ -133,6 +138,8 @@ public class ContactForm {
         else
             RecommenderManager.instance().initTrackRecommenders();
 
+
+         */
         model.put("infoMessage", "Se han reentrenado 3 modelos intem-intem y 3 modelos user-user de tipo:"+tipoRecomendador);
         return new ModelAndView("taller1UsuarioRating", model);
     }
@@ -142,7 +149,7 @@ public class ContactForm {
         boolean rta = false;
         String user = params.get("user");
 
-        HashMap<String, Long> nuevo = models.getUsers_ids();
+        /*HashMap<String, Long> nuevo = models.getUsers_ids();
         System.out.println("en hash map" + nuevo.get(user));
 
         Long userL = nuevo.get(user);
@@ -150,6 +157,8 @@ public class ContactForm {
             rta = true;
 
         }
+
+         */
 
         return rta;
     }
@@ -159,12 +168,15 @@ public class ContactForm {
 
         String user = params.get("user");
 
+        /*
         HashMap<String, Long> nuevo = models.getUsers_ids();
         System.out.println("en hash map" + nuevo.get(user));
         Long id = new Long(nuevo.size()+1);
 
 
         models.addUser(user, id);
+
+         */
     }
 
 

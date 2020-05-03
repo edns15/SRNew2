@@ -1,8 +1,8 @@
 package com.sr.taller1.controller;
 
-import com.sr.taller1.data.DataRecommendationModels;
-import com.sr.taller1.model.Recommendation;
-import com.sr.taller1.recommender.RecommenderManager;
+//import com.sr.taller1.data.DataRecommendationModels;
+//import com.sr.taller1.model.Recommendation;
+//import com.sr.taller1.recommender.RecommenderManager;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +18,16 @@ import java.util.Map;
 @Controller
 public class Taller1Controller {
 
-    private RecommenderManager recommenders = RecommenderManager.instance();
+    //private RecommenderManager recommenders = RecommenderManager.instance();
 
     public Taller1Controller() throws IOException, TasteException {
     }
+    //t1_rc_artistas_canciones
 
-    @RequestMapping("/t1_rc_artistas_canciones")
-    public ModelAndView t1RcArtistasCanciones(@RequestParam Map<String, String> params) throws TasteException {
+    @RequestMapping("/t2_restaurantes_recomendacion")
+    public ModelAndView t2RecomendacionRestaurantes(@RequestParam Map<String, String> params) throws TasteException {
 
-        String tipoRecomendador = params.get("tipoRecomendador");
+        String tipoRecomendador = params.get("tipoPosicion");
         String algoritmo = params.get("algoritmo");
         String user = params.get("user");
         String tipo_algoritmo = params.get("tipo_algoritmo");
@@ -39,7 +40,7 @@ public class Taller1Controller {
         model.put("tipo_algoritmo",tipo_algoritmo);
         model.put("resultados",resultados);
 
-        try {
+        /*try {
             if(DataRecommendationModels.instance().getUser(user) == null)
             {
                 model.put("errorMessage","Usuario no existe");
@@ -51,13 +52,15 @@ public class Taller1Controller {
             System.out.println("Recommendations: "+recomendation);
             return new ModelAndView("taller1", model);
         }
+
         catch(org.apache.mahout.cf.taste.common.NoSuchUserException ex){
             model.put("errorMessage","Usuario no existe");
             return new ModelAndView("taller1", model);
         } catch (IOException e) {
             model.put("errorMessage","IO Error");
             return new ModelAndView("taller1", model);
-        }
+        }*/
+        return null;
 
     }
 
