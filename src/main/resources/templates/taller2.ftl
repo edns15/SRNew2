@@ -77,6 +77,7 @@
                     <td>${recommendation.name}</td>
                     <td>${recommendation.address}</td>
                     <td>${recommendation.city}</td>
+                    <td>${recommendation.state}</td>
                   </tr>
                   </#list>
                 </tbody>

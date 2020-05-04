@@ -22,6 +22,7 @@ public class DataRecommendation {
     public HashMap<String, String> WI = new HashMap<>();
 
     public HashMap<String, User> Users = new HashMap<>();
+    public HashMap<String, String> User_Names = new HashMap<>();
     public HashMap<String, Business> Business = new HashMap<>();
 
     private String business_file = "business-app.csv";
@@ -257,9 +258,9 @@ public class DataRecommendation {
                     String name = nuevo[1];
                     String address = nuevo[2];
                     String city = nuevo[3];
-                    String state = nuevo[3];
+                    String state = nuevo[4];
                     Business bu = new Business(id, name, address, city, state);
-                    Business.put(id, bu);
+                    Business.put(id.toLowerCase(), bu);
                 }
             });
         } catch (IOException e) {
@@ -277,6 +278,8 @@ public class DataRecommendation {
                 if(nuevo.length>2){
                     String id = nuevo[0];
                     String username = nuevo[1];
+
+                    User_Names.put(username,id);
                     String years =nuevo[2];
 
                     User usuario = new User(id, username, years);
